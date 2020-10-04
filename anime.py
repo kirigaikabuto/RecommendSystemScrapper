@@ -5,7 +5,7 @@ import time
 
 animes = []
 names = []
-for el in range(1,100):
+for el in range(1,248):
     print(el)
     url = f"https://animevost.am/page/{el}/"
     page = requests.get(url)
@@ -27,4 +27,5 @@ print(names)
 print(len(names))
 print(len(animes))
 pd = pd.DataFrame(animes)
-pd.to_csv("data.csv")
+pd = pd.replace(r'\n\n',' ', regex=True)
+pd.to_csv("../RecommendedSystem/data.csv")
