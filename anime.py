@@ -14,18 +14,21 @@ for el in range(1,248):
     for i in animeInfo:
         anime = {}
         title_div = i.find("div", class_="shortstoryHead")
+        image = i.find("img", class_="imgRadius")
+        image_url = "https://animevost.am"+image["src"]
         title = title_div.text.rstrip("\n\n")
         table = i.find("table")
         info = table.find_all("p")
         anime["название"] = title
+        anime["фотография"] = image_url
         for j in info:
             parts = j.text.split(":")
             if parts[0] != "Режиссёр":
                 anime[parts[0]] = parts[1]
         animes.append(anime)
+print(animes)
 print(names)
 print(len(names))
-print(len(animes))
 pd = pd.DataFrame(animes)
 pd = pd.replace(r'\n\n',' ', regex=True)
 pd.to_csv("../RecommendedSystem/data.csv")
